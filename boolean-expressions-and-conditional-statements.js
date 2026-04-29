@@ -24,33 +24,38 @@ Paste the following code into your editor:
 
 */
 
-
 const readline = require('readline-sync');
 
-const hasTorch = true;
+const hasTorch = false;
 const hasMap = false;
+const hasSword = true;
 const hasTent = false;
 
 console.log("You see two paths: one leads to the mountains, the other to the village.");
-const choice = readline.question("Do you go to the 'mountains' or the 'village', or do you 'stay'? ");
+const choice = readline.question("Do you go to the 'mountains' or the 'village'? ");
 
 if (choice === "mountains" && hasTorch) {
   console.log("You safely navigate through the dark mountains.");
 } else if (choice === "mountains" && !hasTorch) {
-  console.log("It's too dark to proceed. You decide to turn back.");
-} else if (choice === "village" && hasMap) {
-  console.log("You find your way to the village.");
-} else if (choice === "village" && !hasMap && hasTorch) {
-  console.log("You get lost on the way, and now it is dark. Do you 'turn back' or 'keep going?'");
-  const choice2 = readline.question("Enter 'turn back' or 'keep going': ")
-    if (choice2 === "turn back") {console.log("Game Over")}
-      else if (choice2 === "keep going" && hasTorch) {console.log("It's a difficult night, but you make it safely at dawn")}
-      else {console.log("You are hopelessly lost forever")}
+  console.log("It's too dark to proceed. Do you try to find your way back or stay put?");
+  const choice2 = readline.question("Enter 'go back' or 'stay put' ");
+    if (choice2 === 'go back' && hasTorch){console.log("You're back with you started. Game over, try again.")}
+    else if (choice2 === 'go back' && !hasTorch){console.log("Without a torch you are hopelessly lost. Game over.")}
+    else if (choice2 === 'stay put' && hasTent){console.log("You stay the night. The next day you find your way through the mountains.")}
+    else if (choice2 === 'stay put' && !hasTent) {console.log("Without adequate shelter you freeze to death. Game over.")}
+} else if (choice === "village" || hasMap) {
+  console.log("You find your way to the village. It is under attack by orcs. Do you stay and fight or flee?");
+  const choice3 = readline.question("Enter 'fight' or 'flee' ");
+  if (choice3 === "fight" && hasSword) {
+    console.log("You defeat the orcs and are the hero of the village")
+  }
+    else if (choice3 === 'fight' && !hasSword){
+      console.log("You are brave, but without a weapon you are killed with the rest of the villagers.")
     }
- else if (choice === "stay" && hasTent) {
-  console.log("You set up camp and enjoy the scenery.");
-} else if (choice === "stay" && !hasTent) {
-  console.log("You are not equipped to stay here and weather the elements.");
+    else if (choice3 === 'flee'){
+      console.log("Your cowardice has saved your life, but you are no hero. Game over.")
+    };
+    
 } else {
   console.log("You get lost and wander aimlessly.");
 }
@@ -63,5 +68,3 @@ Add Customization and expand the game:
   - Use nested conditionals and logical operators to create complex outcomes.
 
 */
-
-
